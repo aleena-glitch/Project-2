@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NovaWorks Enterprise PM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4f5fb;--sf:#fff;--tx:#161a33;--mut:#646a86;--bd:#e4e6f2;--pr:#2d2fa8;--prt:#fff;--prs:#e8e9fb;--se:#2563eb;--te:#0f9d6e;--wa:#c2760a;--er:#d92d20}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0f1120;--sf:#181b30;--tx:#eceefb;--mut:#9ba1c0;--bd:#2a2e4a;--pr:#8f93ff;--prt:#0f1120;--prs:#23274a;--se:#60a5fa;--te:#34d399;--wa:#fbbf24;--er:#f87171}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1120;--sf:#181b30;--tx:#eceefb;--mut:#9ba1c0;--bd:#2a2e4a;--pr:#8f93ff;--prt:#0f1120;--prs:#23274a;--se:#60a5fa;--te:#34d399;--wa:#fbbf24;--er:#f87171}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+h1,h2,h3,p{margin:0}h2{font-size:22px;letter-spacing:-.3px}h3{font-size:15px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;background:var(--sf);border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--pr);color:var(--prt);display:grid;place-items:center;font-weight:800}
+nav{display:flex;gap:4px}
+nav button{background:none;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:0;padding:6px 14px;border-radius:10px;font-size:12px}
+nav button span{font-size:18px}
+nav button.on{background:var(--prs);color:var(--pr)}
+@media (max-width:760px){nav{position:fixed;left:0;right:0;bottom:0;background:var(--sf);border-top:1px solid var(--bd);justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}main{padding-bottom:90px!important}}
+main{max-width:1040px;margin:0 auto;padding:22px 18px}
+button,select,input,textarea{font:inherit;color:var(--tx)}
+button{border:0;border-radius:10px;padding:9px 16px;cursor:pointer;background:var(--pr);color:var(--prt);font-weight:600}
+button.g{background:var(--sf);color:var(--tx);border:1px solid var(--bd)}
+button.sm{padding:4px 10px;font-size:12px}
+button:disabled{opacity:.55;cursor:wait}
+input,select,textarea{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:9px 12px;width:100%}
+textarea{min-height:200px;resize:vertical}
+select.sm{width:auto;padding:3px 8px;font-size:12px}
+.card{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:18px;margin-bottom:14px}
+.hero{background:linear-gradient(135deg,var(--pr),var(--se));color:#fff;border:0}
+.hero p{opacity:.9;margin-top:4px}
+.hero button{background:#fff;color:#2d2fa8;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:14px}
+.stat b{font-size:26px;display:block;line-height:1.1}.stat span{color:var(--mut);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.mut{color:var(--mut);font-size:13px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.sp{justify-content:space-between}
+.tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 9px;border-radius:99px;background:var(--prs);color:var(--pr)}
+.tag.high{background:color-mix(in srgb,var(--er) 15%,transparent);color:var(--er)}
+.tag.medium{background:color-mix(in srgb,var(--wa) 15%,transparent);color:var(--wa)}
+.tag.low{background:color-mix(in srgb,var(--te) 15%,transparent);color:var(--te)}
+.bar{height:7px;background:var(--prs);border-radius:9px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:var(--te);border-radius:9px}
+.av{width:34px;height:34px;border-radius:50%;background:var(--prs);color:var(--pr);display:grid;place-items:center;font-weight:700;font-size:12px;flex:none}
+.task{display:flex;gap:10px;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--bd);flex-wrap:wrap}
+.task.done b{text-decoration:line-through;color:var(--mut)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.chips button{background:var(--sf);color:var(--mut);border:1px solid var(--bd);border-radius:99px;padding:5px 14px}
+.chips button.on{background:var(--pr);color:var(--prt);border-color:var(--pr)}
+.login{max-width:400px;margin:7vh auto;padding:0 16px}
+.login label{display:block;margin:12px 0 4px;font-weight:600}
+.err{color:var(--er);margin-top:8px}.ok{color:var(--te)}
+.pv{border:1px dashed var(--pr);background:var(--prs)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const USERS=[
+{id:"admin",name:"Admin User",email:"admin@novaworks.pk",pass:"admin123",role:"admin",title:"Administrator",dept:"Executive / Ops"},
+{id:"usman",name:"Usman Tariq",email:"usman@novaworks.pk",pass:"nova123",role:"manager",title:"Project Manager",dept:"Delivery"},
+{id:"ali",name:"Ali Khan",email:"ali@novaworks.pk",pass:"nova123",role:"dev",title:"Frontend Developer",dept:"Frontend Engineering"},
+{id:"sara",name:"Sara Ahmed",email:"sara@novaworks.pk",pass:"nova123",role:"dev",title:"Backend Developer",dept:"Backend Engineering"},
+{id:"zain",name:"Zain Ahmed",email:"zain@novaworks.pk",pass:"nova123",role:"dev",title:"Security Engineer",dept:"Security & Compliance"},
+{id:"bilal",name:"Bilal Tariq",email:"bilal@novaworks.pk",pass:"nova123",role:"dev",title:"Mobile Developer",dept:"Mobile Engineering"}];
+const SAMPLE=`Project: FinTech Mobile Wallet App
+Manager: Usman Tariq
+- Build user authentication screens and dashboard UI assigned to Ali for 10 hours deadline 2026-11-24, high priority
+- Develop transaction ledger API and database schema assigned to Sara for 14 hours deadline 2026-11-28
+- Run security and penetration testing assigned to Zain for 8 hours deadline 2026-12-02
+Project: Lahore Retail Logistics App
+Manager: Usman Tariq
+- Live GPS delivery tracking sync assigned to Bilal for 12 hours due 2026-12-05 urgent`;
+const KEY="novaworks_pm_v2";
+let S={projects:null,session:null};
+try{const r=localStorage.getItem(KEY);if(r)S=JSON.parse(r)}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const U=id=>USERS.find(u=>u.id===id), me=()=>U(S.session);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ini=n=>n.split(" ").map(w=>w[0]).join("").slice(0,2);
+const today=()=>new Date().toISOString().slice(0,10);
+const plus=d=>new Date(Date.now()+d*864e5).toISOString().slice(0,10);
+let V={tab:"projects",q:"",f:"all",tf:"all",open:new Set(),pending:null,draft:"",busy:false,msg:"",src:""};
+
+// ---------- RBAC ----------
+const canSee=(p,u)=>u.role==="admin"||(u.role==="manager"&&p.manager===u.id)||p.tasks.some(t=>t.assignee===u.id);
+const seesAll=(p,u)=>u.role==="admin"||(u.role==="manager"&&p.manager===u.id);
+const vis=(p,u)=>seesAll(p,u)?p.tasks:p.tasks.filter(t=>t.assignee===u.id);
+const pct=ts=>ts.length?Math.round(ts.filter(t=>t.status==="done").length/ts.length*100):0;
+
+// ---------- Extraction: Claude AI with offline rule-based fallback ----------
+function normalize(out){
+  const n=Date.now();
+  return(out.projects||[]).map((p,i)=>({id:"p"+n+i,name:String(p.name||"Untitled project"),description:String(p.description||""),
+    manager:USERS.find(u=>u.id===p.manager&&u.role==="manager")?p.manager:"usman",created:today(),
+    tasks:(p.tasks||[]).map((t,j)=>({id:"t"+n+i+"_"+j,title:String(t.title||"Task"),
+      assignee:USERS.find(u=>u.id===t.assignee&&u.role==="dev")?t.assignee:"ali",
+      deadline:/^\d{4}-\d{2}-\d{2}$/.test(t.deadline)?t.deadline:plus(7),hours:Number(t.estimated_hours)||4,
+      priority:["high","medium","low"].includes(t.priority)?t.priority:"medium",status:"todo"}))})).filter(p=>p.tasks.length);
+}
+function ruleParse(text){
+  const out={projects:[]};let cur=null;
+  const mk=name=>{cur={name,manager:"usman",tasks:[]};out.projects.push(cur)};
+  const find=(l,role)=>USERS.find(u=>(!role||u.role===role)&&u.role!=="admin"&&new RegExp("\\b"+u.name.split(" ")[0]+"\\b","i").test(l));
+  text.split(/\n/).map(l=>l.trim()).filter(Boolean).forEach(l=>{
+    let m;
+    if(m=l.match(/^project\s*:\s*(.+)/i)){mk(m[1]);return}
+    if(m=l.match(/^manager\s*:\s*(.+)/i)){if(!cur)mk("NovaWorks Project");cur.manager=(find(m[1],"manager")||{id:"usman"}).id;return}
+    const dev=find(l,"dev"),h=l.match(/(\d+)\s*(hours|hrs|hr|h)\b/i),d=l.match(/\d{4}-\d{2}-\d{2}/);
+    if(!dev&&!h&&!d)return;
+    if(!cur)mk("NovaWorks Project");
+    cur.tasks.push({title:l.replace(/^[-*•\d.\s]+/,"").replace(/\s*(assigned to|for)\s+\w+.*$/i,"")||l,assignee:(dev||{id:"ali"}).id,
+      estimated_hours:h?+h[1]:4,deadline:d?d[0]:plus(7),priority:/urgent|critical|high/i.test(l)?"high":/low/i.test(l)?"low":"medium"});
+  });
+  return out;
+}
+async function extract(text){
+  try{
+    const s=window.claude?.use?await claude.use("sample"):null;
+    if(s){
+      const team=USERS.filter(u=>u.role!=="admin").map(u=>({id:u.id,name:u.name,role:u.role,title:u.title}));
+      const out=await s.json(`You turn meeting notes into projects and tasks for NovaWorks Technologies (Lahore). Today is ${today()}. Team (use ONLY these ids): ${JSON.stringify(team)}.
+Each project needs one manager id (role manager). Each task needs one developer id (role dev), deadline YYYY-MM-DD (resolve relative dates from today; estimate if missing), estimated_hours number (estimate if missing) and priority high|medium|low. Prefer people named in the notes, else best fit by title.
+Return ONLY JSON: {"projects":[{"name":"","description":"","manager":"usman","tasks":[{"title":"","assignee":"ali","deadline":"YYYY-MM-DD","estimated_hours":0,"priority":"medium"}]}]}
+Notes:
+${text}`,{cache:false});
+      const ps=normalize(out);if(ps.length)return{ps,src:"Claude AI"};
+    }
+  }catch(e){}
+  try{
+  const team=USERS.filter(u=>u.role!=="admin").map(u=>({id:u.id,name:u.name,role:u.role,title:u.title}));
+  const r=await fetch("/api/extract",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({text,team,today:today()})});
+  if(r.ok){const ps=normalize(await r.json());if(ps.length)return{ps,src:"Claude AI"}}
+}catch(e){}
+  return{ps:normalize(ruleParse(text)),src:"Offline rule-based parser"};
+}
+if(!S.projects){S.projects=normalize(ruleParse(SAMPLE));save()}
+
+// ---------- Views ----------
+function render(){
+  const r=document.getElementById("app"),u=me();
+  if(!u){r.innerHTML=`<div class="login card"><div class="logo"><div class="mark">N</div>NovaWorks Enterprise PM</div>
+  <p class="mut" style="margin-top:6px">Lahore Hub · Project Management Portal</p>
+  <label>Email</label><input id="em" type="email" autocomplete="username"><label>Password</label><input id="pw" type="password" autocomplete="current-password">
+  <div class="err">${esc(V.msg)}</div><button id="go" style="width:100%;margin-top:12px">Sign in</button>
+  <p class="mut" style="margin:16px 0 8px">Quick demo access</p><div class="chips" style="margin:0">${USERS.slice(0,4).map(x=>`<button data-demo="${x.id}">${x.role==="dev"?x.name.split(" ")[0]:x.title}</button>`).join("")}</div></div>`;bind();return}
+  const tabs=[["projects","📁","Projects"],["tasks","✅","Tasks"],["team","👥","Team"]];
+  if(u.role==="admin")tabs.unshift(["ingest","✨","Meeting AI"]);
+  r.innerHTML=`<div class="top"><div class="logo"><div class="mark">N</div>NovaWorks PM</div>
+  <nav>${tabs.map(t=>`<button data-tab="${t[0]}" class="${V.tab===t[0]?"on":""}"><span>${t[1]}</span>${t[2]}</button>`).join("")}</nav>
+  <div class="row"><div class="av">${ini(u.name)}</div><div><b>${esc(u.name)}</b><div class="mut">${u.title}</div></div><button class="g sm" id="out">Log out</button></div></div>
+  <main>${V.tab==="ingest"?ingest():V.tab==="tasks"?tasks(u):V.tab==="team"?team():projectsView(u)}</main>`;
+  bind();
+}
+function stats(u){
+  const ps=S.projects.filter(p=>canSee(p,u)),ts=ps.flatMap(p=>vis(p,u));
+  const c=[[ps.length,"Projects"],[ts.length,"Tasks"],[ts.reduce((a,t)=>a+t.hours,0)+"h","Estimated hours"],[pct(ts)+"%","Completed"]];
+  return`<div class="stats">${c.map(x=>`<div class="card stat" style="margin:0"><b>${x[0]}</b><span>${x[1]}</span></div>`).join("")}</div>`;
+}
+function projectsView(u){
+  return`<h2>Projects</h2><p class="mut" style="margin:2px 0 14px">${u.role==="dev"?"Only projects with tasks assigned to you":u.role==="manager"?"Projects you manage":"All company projects"}</p>
+  ${stats(u)}${u.role==="admin"?`<div class="card hero"><h3>Meeting to Project</h3><p>Paste a transcript and let AI create projects, tasks, owners, deadlines and hours.</p><button data-tab="ingest">Open Meeting AI</button></div>`:""}
+  <input id="q" placeholder="Search projects, tasks or people…" value="${esc(V.q)}">
+  <div class="chips">${["all","active","done"].map(f=>`<button data-f="${f}" class="${V.f===f?"on":""}">${f==="all"?"All":f==="active"?"In progress":"Completed"}</button>`).join("")}</div><div id="plist">${plist(u)}</div>`;
+}
+function plist(u){
+  const q=V.q.toLowerCase();
+  const ps=S.projects.filter(p=>canSee(p,u)).filter(p=>{const c=pct(vis(p,u));return V.f==="all"||(V.f==="done"?c===100:c<100)})
+   .filter(p=>!q||(p.name+(U(p.manager)?.name||"")+vis(p,u).map(t=>t.title+(U(t.assignee)?.name||"")).join(" ")).toLowerCase().includes(q));
+  if(!ps.length)return`<div class="card mut">No projects match.</div>`;
+  return`<div class="grid">${ps.map(p=>{const ts=vis(p,u),c=pct(ts),o=V.open.has(p.id),ppl=[...new Set(ts.map(t=>t.assignee))];
+   return`<div class="card" style="margin:0"><div class="row sp"><h3>${esc(p.name)}</h3><span class="tag">${c}%</span></div>
+   <div class="mut">Manager: ${esc(U(p.manager)?.name||"—")} · ${ts.length} tasks · ${ts.reduce((a,t)=>a+t.hours,0)}h</div>
+   <div class="bar"><i style="width:${c}%"></i></div>
+   <div class="row sp"><div class="row" style="gap:4px">${ppl.map(a=>`<div class="av" title="${esc(U(a)?.name)}" style="width:26px;height:26px;font-size:10px">${ini(U(a)?.name||"?")}</div>`).join("")}</div>
+   <button class="g sm" data-tg="${p.id}">${o?"Hide tasks":"View tasks"}</button></div>
+   ${o?ts.map(t=>taskRow(p,t,u)).join(""):""}</div>`}).join("")}</div>`;
+}
+function taskRow(p,t,u,showProj){
+  const can=seesAll(p,u)||t.assignee===u.id,late=t.status!=="done"&&t.deadline<today();
+  return`<div class="task ${t.status==="done"?"done":""}"><div><b>${esc(t.title)}</b><div class="mut">${showProj?esc(p.name)+" · ":""}${esc(U(t.assignee)?.name||"—")} · due ${t.deadline}${late?` <span style="color:var(--er)">overdue</span>`:""} · ${t.hours}h</div></div>
+  <div class="row"><span class="tag ${t.priority}">${t.priority}</span>${can?`<select class="sm" data-st="${p.id}|${t.id}">${[["todo","To do"],["doing","In progress"],["done","Done"]].map(s=>`<option value="${s[0]}" ${t.status===s[0]?"selected":""}>${s[1]}</option>`).join("")}</select>`:`<span class="tag">${t.status}</span>`}</div></div>`;
+}
+function tasks(u){
+  const rows=[];S.projects.forEach(p=>p.tasks.forEach(t=>{if(t.assignee===u.id)rows.push([p,t])}));
+  return`<h2>My tasks</h2><p class="mut" style="margin:2px 0 14px">${rows.length} assigned to you · ${rows.reduce((a,r)=>a+r[1].hours,0)}h total</p>
+  <div class="card">${rows.length?rows.map(r=>taskRow(r[0],r[1],u,1)).join(""):`<span class="mut">No tasks assigned to you${u.role==="admin"?" (admins oversee from the Projects tab)":""}.</span>`}</div>`;
+}
+function team(){
+  const L=USERS.filter(u=>V.tf==="all"||u.role===V.tf);
+  return`<h2>Team directory</h2><p class="mut">NovaWorks Technologies · Lahore Hub</p>
+  <div class="chips">${[["all","All staff"],["manager","Project managers"],["dev","Developers"],["admin","Admin"]].map(f=>`<button data-tf="${f[0]}" class="${V.tf===f[0]?"on":""}">${f[1]}</button>`).join("")}</div>
+  <div class="grid">${L.map(u=>{const ts=S.projects.flatMap(p=>p.tasks).filter(t=>t.assignee===u.id&&t.status!=="done"),h=ts.reduce((a,t)=>a+t.hours,0);
+   return`<div class="card" style="margin:0"><div class="row"><div class="av">${ini(u.name)}</div><div><b>${esc(u.name)}</b><div class="mut">${u.title}</div></div></div>
+   <div class="mut" style="margin-top:8px">${u.dept}<br>${u.email}</div>
+   ${u.role==="dev"?`<div class="row sp mut" style="margin-top:8px"><span>${ts.length} open tasks</span><span>${h}h workload</span></div><div class="bar"><i style="width:${Math.min(100,h/40*100)}%;background:${h>30?"var(--er)":"var(--se)"}"></i></div>`:""}</div>`}).join("")}</div>`;
+}
+function ingest(){
+  const P=V.pending;
+  return`<h2>AI Meeting Ingest</h2><p class="mut" style="margin:2px 0 14px">Paste a description or transcript, review the extracted blueprint, then save.</p>
+  <div class="card"><textarea id="mt" placeholder="Paste meeting transcript…">${esc(V.draft)}</textarea>
+  <div class="row" style="margin-top:10px"><button id="an" ${V.busy?"disabled":""}>${V.busy?"Analyzing…":"✨ Generate projects & tasks"}</button><button class="g" id="smp">Load sample</button></div>
+  ${V.msg?`<div class="err">${esc(V.msg)}</div>`:""}</div>
+  ${P?`<div class="card pv"><div class="row sp"><h3>Extracted blueprint</h3><span class="tag">${esc(V.src)}</span></div>
+  <p class="mut">${P.length} project(s) · ${P.reduce((a,p)=>a+p.tasks.length,0)} tasks · ${P.reduce((a,p)=>a+p.tasks.reduce((x,t)=>x+t.hours,0),0)}h total. Adjust owners if needed.</p>
+  ${P.map((p,i)=>`<div class="card" style="margin:10px 0 0"><h3>${esc(p.name)}</h3><div class="mut">Manager: ${esc(U(p.manager)?.name)}</div>${p.tasks.map((t,j)=>`<div class="task"><div><b>${esc(t.title)}</b><div class="mut">due ${t.deadline} · ${t.hours}h · <span class="tag ${t.priority}">${t.priority}</span></div></div>
+  <select class="sm" data-as="${i}|${j}">${USERS.filter(u=>u.role==="dev").map(u=>`<option value="${u.id}" ${u.id===t.assignee?"selected":""}>${u.name}</option>`).join("")}</select></div>`).join("")}</div>`).join("")}
+  <div class="row" style="margin-top:12px"><button id="sv">Save to projects</button><button class="g" id="dc">Discard</button></div></div>`:""}`;
+}
+
+// ---------- Events ----------
+function bind(){
+  const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+  const login=id=>{S.session=id;V.msg="";V.tab=U(id).role==="admin"?"ingest":"projects";save();render()};
+  $("#go")?.addEventListener("click",()=>{const u=USERS.find(x=>x.email===$("#em").value.trim().toLowerCase()&&x.pass===$("#pw").value);if(u)login(u.id);else{V.msg="Invalid email or password.";render()}});
+  $("#pw")?.addEventListener("keydown",e=>{if(e.key==="Enter")$("#go").click()});
+  $$("[data-demo]").forEach(b=>b.onclick=()=>login(b.dataset.demo));
+  $("#out")?.addEventListener("click",()=>{S.session=null;V.msg="";save();render()});
+  $$("[data-tab]").forEach(b=>b.onclick=()=>{V.tab=b.dataset.tab;V.msg="";render()});
+  $$("[data-f]").forEach(b=>b.onclick=()=>{V.f=b.dataset.f;render()});
+  $$("[data-tf]").forEach(b=>b.onclick=()=>{V.tf=b.dataset.tf;render()});
+  $$("[data-tg]").forEach(b=>b.onclick=()=>{const k=b.dataset.tg;V.open.has(k)?V.open.delete(k):V.open.add(k);render()});
+  $("#q")?.addEventListener("input",e=>{V.q=e.target.value;$("#plist").innerHTML=plist(me())});
+  $$("[data-st]").forEach(s=>s.onchange=()=>{const[a,b]=s.dataset.st.split("|");const t=S.projects.find(p=>p.id===a)?.tasks.find(t=>t.id===b);if(t){t.status=s.value;save();render()}});
+  $("#smp")?.addEventListener("click",()=>{V.draft=SAMPLE;render()});
+  $$("[data-as]").forEach(s=>s.onchange=()=>{const[i,j]=s.dataset.as.split("|");V.pending[i].tasks[j].assignee=s.value});
+  $("#dc")?.addEventListener("click",()=>{V.pending=null;render()});
+  $("#sv")?.addEventListener("click",()=>{S.projects.unshift(...V.pending);V.pending=null;save();V.tab="projects";render()});
+  $("#an")?.addEventListener("click",async()=>{
+    V.draft=$("#mt").value.trim();if(!V.draft){V.msg="Paste some meeting text first.";render();return}
+    V.busy=true;V.msg="";V.pending=null;render();
+    const r=await extract(V.draft);V.busy=false;
+    if(r.ps.length){V.pending=r.ps;V.src=r.src}else V.msg="Could not find any tasks in that text.";
+    render();
+  });
+}
+render();
+</script>
+</body>
+</html>
